@@ -29,7 +29,7 @@ const VideoList = ({ playlistId }) => {
     }, [playlistId]);
 
     return (
-        <div className="video-list pl-64"> {/* Add left padding */}
+        <div className="video-list pl-64"> 
             {isLoading && <p>Loading videos...</p>}
             {error && <p>Error: {error}</p>}
             <div className="flex flex-wrap">
