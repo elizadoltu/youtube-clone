@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API_KEY from './API_KEY';
+import VideoItem from '../../components/VideoItem';
 
 const VideoList = ({ playlistId }) => {
     const [videos, setVideos] = useState([]);
@@ -27,24 +28,15 @@ const VideoList = ({ playlistId }) => {
         fetchVideos();
     }, [playlistId]);
 
-    const renderVideos = () => {
-        return (
-            <ul>
-                {videos.map((video) => (
-                    <li key={video.snippet.resourceId.videoId}>
-                        <a href={`https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`}>
-                            {video.snippet.title}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        );
-    };
     return (
-        <div>
+        <div className="video-list pl-64"> {/* Add left padding */}
             {isLoading && <p>Loading videos...</p>}
             {error && <p>Error: {error}</p>}
-            {videos.length > 0 && renderVideos()}
+            <div className="flex flex-wrap">
+                {videos.map((video) => (
+                    <VideoItem key={video.snippet.resourceId.videoId} video={video} />
+                ))}
+            </div>
             {videos.length === 0 && !isLoading && <p>No videos found.</p>}
         </div>
     );
